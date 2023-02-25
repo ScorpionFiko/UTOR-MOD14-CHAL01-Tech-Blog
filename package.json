@@ -1,0 +1,40 @@
+{
+  "name": "utor-mod14-chal01-tech-blog",
+  "version": "1.0.0",
+  "description": "Tech Blog website where user can contribute by writing articles or making comments. ",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ScorpionFiko/UTOR-MOD14-CHAL01-Tech-Blog.git"
+  },
+  "keywords": [
+    "node",
+    "express",
+    "sequelize",
+    "handlebars",
+    "bootstrap",
+    "dotenv",
+    "middleware",
+    "session"
+  ],
+  "author": "Stefan Marinov",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ScorpionFiko/UTOR-MOD14-CHAL01-Tech-Blog/issues"
+  },
+  "homepage": "https://github.com/ScorpionFiko/UTOR-MOD14-CHAL01-Tech-Blog#readme",
+  "dependencies": {
+    "sequelize":"^6.29.0",
+    "express": "^4.18.2",
+    "bcrypt": "^5.0.0",
+    "connect-session-sequelize": "^7.0.4",
+    "dotenv": "^8.2.0",
+    "express-handlebars": "^5.2.0",
+    "express-session": "^1.17.1",
+    "handlebars": "^4.7.6",
+    "mysql2": "^2.2.5"
+  }
+}
