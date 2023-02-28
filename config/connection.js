@@ -10,7 +10,7 @@ const sequelize = process.env.JAWSDB_URL
       dialectOptions: {
         decimalNumbers: true,
       },
-      timezone: `America/Toronto`
+      timezone: `-05:00`
     });
 
 module.exports = sequelize;

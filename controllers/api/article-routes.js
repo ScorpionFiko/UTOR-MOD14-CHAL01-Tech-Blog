@@ -54,6 +54,17 @@ router.delete('/:id', withAuth, async (req, res) => {
         res.status(500).json(err);
     }
 });
+// dashboard getting particular article to display for editing.
+router.get('/:id', withAuth, async (req, res) => {
+    try {
+        const articleData = await Article.findByPk(req.params.id);
+
+        res.status(200).json(articleData);
+    } catch (err) {
+        console.log(err);
+        res.status(500).json(err);
+    }   
+});
 
 
 module.exports = router;

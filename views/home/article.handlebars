@@ -1,0 +1,47 @@
+<div class="container d-flex flex-column align-items-center ">
+<section class="card m-3">
+  <div class="bg-primary-subtle p-3">
+    
+    <header class=" card-title">{{article.title}} </header>
+    <div class="card-text">- {{article.user.username}}; created on: {{format_date article.createdAt}}</div>
+  </div>
+      <div class="card-body">
+    <div class="card-text">
+      <p>{{article.text}}</p>
+    </div>
+  </div>
+</section>
+{{#each article.comments as |comment|}}
+{{> homepage-comment}}
+{{/each}}
+<section class="card w-75 m-3">
+  <div class="bg-success-subtle p-3">
+    <div class="card-text">Add Comment</div>
+  </div>
+  <div class="card-body">
+            <form class="form" id="commentForm">
+          <!-- userID input -->
+          <div class=" mb-4 mx-2">
+            <input type="hidden" id="commentUserId" class="form-control" value={{ userId }} />
+          </div>       
+          <!-- article_id -->
+          <div class=" mb-4 mx-2">
+            <input type="hidden" id="commentArticleId" class="form-control" value={{ article.id }} />
+          </div>     
+          <!-- text input -->
+          <div class="mb-4 mx-2">
+            <label class="form-label " for="commentText">Comment:</label>
+            <textarea rows="3" id="commentText" class="form-control " /></textarea>
+          </div>
+          <div class="d-flex justify-content-center">
+
+            <!-- Submit button -->
+            <button type="submit" class="mx-2 btn btn-primary btn-block mb-4">Add</button>
+            <button type="cancel" id='cancelComment' class="mx-2 btn btn-light btn-block mb-4">Cancel</button>
+          </div>
+
+        </form>
+  </div>
+</section>
+
+</div>

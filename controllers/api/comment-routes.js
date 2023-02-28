@@ -7,13 +7,12 @@ router.post('/', withAuth, async (req, res) => {
     try {
         const commentData = await Comment.create({
             id: null,
-            title: req.body.title,
             text: req.body.text,
             article_id: req.body.article_id,
             user_id: req.body.user_id
         });
-
-        res.status(200).json(commentData);
+        const comment = commentData.get({plain: true});
+        res.status(200).json(comment);
     } catch (err) {
         console.log(err);
         res.status(500).json(err);

@@ -1,0 +1,15 @@
+<section class="card m-3">
+  <div class="bg-primary-subtle p-3">
+
+    <header class=" card-title">{{title}} </header>
+    {{#if user.username}}
+    <div class="card-text">- {{user.username}}; created on: {{format_date createdAt}}</div>
+    {{/if}}
+  </div>
+  <div class="card-body">
+    <div class="card-text">
+      <p>{{text}}</p>
+      <a href="/article/{{id}}">Read More</a>
+    </div>
+  </div>
+</section>

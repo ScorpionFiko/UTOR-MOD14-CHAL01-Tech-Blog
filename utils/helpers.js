@@ -5,6 +5,7 @@ module.exports = {
         return date.toLocaleTimeString();
       },
       format_date: (date) => {
-        return dayjs(date).format("mm/dd/yyyy");
+        return dayjs(date).format("M/DD/YYYY");
       },
+
 }
