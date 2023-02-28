@@ -11,12 +11,17 @@
         </div>
         <div class="col-8">
           <input
+            class="article-id"
+            placeholder="Article id"
+            type="hidden" id="articleId"
+          />
+           <input
             class="article-title"
             placeholder="Article Title"
             maxlength="28"
-            type="text"
+            type="text" id="articleTitle"
           />
-          <textarea class="article-textarea" placeholder="Article Text"></textarea>
+          <textarea class="article-textarea" placeholder="Article Text" id="articleText"></textarea>
           <div class="icons">
             <i class="fas fa-save text-light save-article"></i>
             <i class="fas fa-plus text-light new-article"></i>

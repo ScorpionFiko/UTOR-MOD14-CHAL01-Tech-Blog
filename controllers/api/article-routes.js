@@ -63,7 +63,7 @@ router.get('/:id', withAuth, async (req, res) => {
             }
         });
         const article = articleData.get({plain: true});
-        res.status(200).json(article);
+        res.json(article);
     } catch (err) {
         console.log(err);
         res.status(500).json(err);

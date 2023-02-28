@@ -1,4 +1,4 @@
-const logoutFormHandler = async (event) => {
+const logoutHandler = async (event) => {
     event.preventDefault();
     $('#logoutMessage').remove();
       const response = await fetch('/api/users/logout', {
@@ -16,5 +16,5 @@ const logoutFormHandler = async (event) => {
         }));      }
     };
   
-  $('#logout').on('click', logoutFormHandler);
+  $('#logout').on('click', logoutHandler);
   

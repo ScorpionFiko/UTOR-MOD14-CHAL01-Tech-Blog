@@ -210,11 +210,18 @@ const handleNoteClick = async (event) => {
   $('#articleMessage').remove();
   if (article.matches('.edit-article')) {
     // fetch note for editing
+
+    fetch(`/api/articles/${article.parentElement.dataset.id}`,{
+      method: 'GET',
+      headers: {'Content-Type': 'application/json' }
+    }).then((response) => {return response.json()}).then((data) => {      
+      $('#articleTitle').val(data.title);
+      $('#articleText').val(data.text);
+      $('#articleId').val(data.id);});
+
   } 
 
   if (article.matches('.delete-article')) {
-    // delete note
-    // refresh after delete
     const deletedNote = await fetch(`/api/articles/${article.parentElement.dataset.id}`, {
       method: 'DELETE',
       headers: {'Content-Type': 'application/json' }
@@ -225,7 +232,7 @@ const handleNoteClick = async (event) => {
       $(article).append($('<div>', {
         class: "alert alert-danger",
         id: "articleMessage",
-        html:"<p>Failed to add comment. Please try again!</p>"
+        html:"<p>Failed to delete article. Please try again!</p>"
       }));
 
     }
