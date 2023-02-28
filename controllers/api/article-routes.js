@@ -9,7 +9,7 @@ router.post('/', withAuth, async (req, res) => {
             id: null,
             title: req.body.title,
             text: req.body.text,
-            user_id: req.body.user_id
+            user_id: req.session.userId
         });
 
         res.status(200).json(articleData);
