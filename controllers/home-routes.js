@@ -21,7 +21,7 @@ router.get('/', async (req, res) => {
 
         const articles = articleData.map((article) => article.get({ plain: true }));
         // must change to res.render("view") later on
-        res.render('home/homepage', { layout:'main', articles, loggedIn: req.session.loggedIn, userId: req.session.userId });
+        res.render('home/homepage', { layout:'main', articles, loggedIn: req.session.loggedIn, userId: req.session.userId, username: req.session.username });
         //res.status(200).json(articles);
     } catch (err) {
         console.log(err);
@@ -44,7 +44,7 @@ router.get('/article/:id', withAuth, async (req, res) => {
 
         const article = articleData.get({plain: true});
         // must change to res.render("view") later on
-        res.render('home/article', { layout: "main", article, loggedIn: req.session.loggedIn,userId: req.session.userId })
+        res.render('home/article', { layout: "main", article, loggedIn: req.session.loggedIn,userId: req.session.userId, username: req.session.username })
     } catch (err) {
         console.log(err);
         res.status(500).json(err);

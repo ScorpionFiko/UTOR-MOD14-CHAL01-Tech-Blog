@@ -63,7 +63,7 @@ const registerFormHandler = async (event) => {
       $('#registerForm').append($('<div>', {
         class: "alert alert-danger",
         id: "registerMessage",
-        html: "<p>Incorrect email or password. Please try again!</p>"
+        html: "<p>Could not register new user. Please try again!</p>"
       }));
 
     }

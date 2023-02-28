@@ -3,6 +3,13 @@
     <div class="col-4 list-container">
       <div class="card">
         <ul class="list-group">
+          {{#unless articles}}
+          <li class="list-group-item">
+            <span class="list-item-title">
+              no articles to display
+            </span>
+          </li>
+          {{/unless}}
           {{#each articles as |article|}}
           {{> dashboard-articles}}
           {{/each}}
@@ -11,12 +18,15 @@
     </div>
     <div class="col-8">
       <form id="articleForm" class="form">
-        <input id="articleId" class="article-id form-control my-2" placeholder="Article id" type="hidden" id="articleId" />
-        <input id="articleTitle" class="article-title form-control my-2" placeholder="Article Title" maxlength="28" type="text" id="articleTitle" />
-        <textarea id="articleText" class="article-textarea form-control my-2" placeholder="Article Text (min 15 characters)" id="articleText" rows="5" ></textarea>
+        <input id="articleId" class="article-id form-control my-2" placeholder="Article id" type="hidden"
+          id="articleId" />
+        <input id="articleTitle" class="article-title form-control my-2" placeholder="Article Title" maxlength="28"
+          type="text" id="articleTitle" />
+        <textarea id="articleText" class="article-textarea form-control my-2"
+          placeholder="Article Text (min 15 characters)" id="articleText" rows="5"></textarea>
         <div class="d-flex justify-content-center">
           <!-- Submit button -->
-          <button type="submit" id ="saveArticle"class="mx-2 btn btn-primary btn-block mb-4">Save</button>
+          <button type="submit" id="saveArticle" class="mx-2 btn btn-primary btn-block mb-4">Save</button>
           <button type="submit" id='newArticle' class="mx-2 btn btn-light btn-block mb-4">New</button>
         </div>
       </form>

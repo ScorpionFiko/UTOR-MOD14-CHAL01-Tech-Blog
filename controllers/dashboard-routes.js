@@ -11,7 +11,7 @@ router.get('/', withAuth, async (req, res) => {
         }
     });
     const articles = articleData.map((article) => article.get({plain: true}));
-    res.render('dashboard/dashboard', {layout: "main", articles, loggedIn: req.session.loggedIn, userId: req.session.userId })
+    res.render('dashboard/dashboard', {layout: "main", articles, loggedIn: req.session.loggedIn, userId: req.session.userId, username: req.session.username })
 });
 
 module.exports = router;

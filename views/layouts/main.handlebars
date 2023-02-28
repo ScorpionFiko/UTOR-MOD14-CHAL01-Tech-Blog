@@ -19,7 +19,11 @@
   <nav class="navbar justify-content-between bg-info">
     <div class="col" >
       <div class="float-left">
-        <a class="navbar-brand text-light p-2" href="/"><h1 class="m-2"><i class="fa fa-microchip"></i>Tech Blog</h1>
+        <a class="navbar-brand text-light p-2" href="/"><h1 class="m-2"><i class="fa fa-microchip"></i>Tech Blog
+        {{#if username}}
+          <span class="fst-italic">Welcome {{username}} </span>
+        {{/if}}
+        </h1>
         </a>
       </div>
     </div>
