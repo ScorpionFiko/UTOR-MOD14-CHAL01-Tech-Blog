@@ -1,8 +1,6 @@
 const logoutFormHandler = async (event) => {
-    // TODO: Add a comment describing the functionality of this statement
     event.preventDefault();
-  
-    
+    $('#logoutMessage').remove();
       const response = await fetch('/api/users/logout', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -11,8 +9,11 @@ const logoutFormHandler = async (event) => {
       if (response.ok) {
         document.location.replace('/');
       } else {
-        alert('Failed to log in');
-      }
+        $('.navbar').append($('<div>', {
+          class: "alert alert-danger",
+          id: "logoutMessage",
+          html: "<p>Could not log out. Please try again!</p>"
+        }));      }
     };
   
   $('#logout').on('click', logoutFormHandler);
