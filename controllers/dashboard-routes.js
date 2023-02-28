@@ -11,8 +11,7 @@ router.get('/', withAuth, async (req, res) => {
         }
     });
     const articles = articleData.map((article) => article.get({plain: true}));
-    // must change to res.render("view") later on
-    res.status(200).json(articles);
+    res.render('dashboard/dashboard', {layout: "main", articles, loggedIn: req.session.loggedIn, userId: req.session.userId })
 });
 
 module.exports = router;

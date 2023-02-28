@@ -37,7 +37,7 @@ const registerFormHandler = async (event) => {
   const username = $('#registerUsername').val().trim();
   const email = $('#registerEmail').val().trim();
   const password = $('#registerPassword').val().trim();
-  const confirmPassword = $('#registerPassword').val().trim();
+  const confirmPassword = $('#registerConfirmPassword').val().trim();
 
   if (password !== confirmPassword) {
     $('#registerForm').append($('<div>', {
@@ -45,6 +45,7 @@ const registerFormHandler = async (event) => {
       id: "registerMessage",
       html: "<p>The passwords do not match. Please try again!</p>"
     }));
+    return;
   }
 
   if (username && email && password) {

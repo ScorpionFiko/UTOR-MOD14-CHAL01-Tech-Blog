@@ -1,0 +1,27 @@
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-4 list-container">
+          <div class="card">
+            <ul class="list-group">
+              {{#each articles as |article|}}
+              {{> dashboard-articles}}
+              {{/each}}
+            </ul>
+          </div>
+        </div>
+        <div class="col-8">
+          <input
+            class="article-title"
+            placeholder="Article Title"
+            maxlength="28"
+            type="text"
+          />
+          <textarea class="article-textarea" placeholder="Article Text"></textarea>
+          <div class="icons">
+            <i class="fas fa-save text-light save-article"></i>
+            <i class="fas fa-plus text-light new-article"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="/js/dashboard.js"></script>
