@@ -1,36 +1,27 @@
-let noteTitle;
-let noteText;
-let saveNoteBtn;
-let newNoteBtn;
-let noteList;
-
+// hiding the save button on page load
 $(document).ready(() => {
   $('#saveArticle').hide();
 });
-
+// ensuring save button appears when required data is entered in both fields
 const handleRenderSaveBtn = () => {
-  if (!$('#articleTitle').val() || !$('#articleText').val()) {
+  if (!$('#articleTitle').val().trim() || !/.{15,}/.test($('#articleText').val().trim())) {
     $('#saveArticle').hide();
   } else {
     $('#saveArticle').show();
   }
 };
-
 $('#articleTitle').keyup(handleRenderSaveBtn);
 $('#articleText').keyup(handleRenderSaveBtn);
 
-
-
-
+// event handler for clicking on the note's view and delete buttons
 const handleNoteClick = async (event) => {
   event.preventDefault();
   event.stopPropagation();
 
   const article = event.target;
   $('#articleMessage').remove();
+  // edit article: fetches article and displays it on the form 
   if (article.matches('.edit-article')) {
-    // fetch note for editing
-
     const articleData = await fetch(`/api/articles/${article.parentElement.dataset.id}`, {
       method: 'GET',
       headers: { 'Content-Type': 'application/json' }
@@ -40,7 +31,9 @@ const handleNoteClick = async (event) => {
       $('#articleTitle').val(editArticle.title);
       $('#articleText').val(editArticle.text);
       $('#articleId').val(editArticle.id);
-    };
+    } else {
+      resetForm();
+    }
   }
 
 
@@ -53,56 +46,63 @@ const handleNoteClick = async (event) => {
     if (deletedNote.ok) {
       document.location.reload();
     } else {
-      $(article).append($('<div>', {
+      $(article).prepend($('<div>', {
         class: "alert alert-danger",
         id: "articleMessage",
-        html: "<p>Failed to delete article. Please try again!</p>"
+        html: "<span>Failed to delete article. Please try again!</span>"
       }));
-
+      resetForm();
     }
 
   }
 }
-
 $('.list-container').on('click', handleNoteClick);
 
-
-$('#newArticle').on('click', (event) => {
-  event.preventDefault();
-  event.stopPropagation();
-
+// resets article form
+const resetForm = () => {
   $('#articleId').val('');
   $('#articleTitle').val('');
   $('#articleText').val('');
   $('#saveArticle').hide();
-});
+}
 
-$('#saveArticle').on('click', async (event) => {
+// handles new note form preparation
+const handleNewNote = (event) => {
+  event.preventDefault();
+  event.stopPropagation();
+  resetForm();
+}
+$('#newArticle').on('click', handleNewNote);
+
+
+// event handler for saving the article regardless of whether the article is new or existing 
+const handleSaveArticle = async (event) => {
   event.preventDefault();
   event.stopPropagation();
 
   let API = `/api/articles`
   if (($('#articleId').val().trim() !== '')) {
-    API += `/${ $('#articleId').val().trim() }`
+    API += `/${$('#articleId').val().trim()}`
   }
 
   const articleData = await fetch(API, {
     method: ($('#articleId').val().trim() === '' ? 'POST' : 'PUT'),
     body: JSON.stringify({
-      id: ($('#articleId').val() === ''  ? '' : $('#articleId').val()),
-      title: $('#articleTitle').val(),
-      text: $('#articleText').val()
+      id: ($('#articleId').val().trim() === '' ? '' : $('#articleId').val()),
+      title: $('#articleTitle').val().trim(),
+      text: $('#articleText').val().trim()
     }),
     headers: { 'Content-Type': 'application/json' },
   });
-  //const newArticle = await articleData.json();
+
   if (articleData.ok) {
     document.location.reload();
   } else {
-    $('#articleForm').append($('<div>', {
+    $('#articleForm').prepend($('<div>', {
       class: "alert alert-danger",
-      id: "loginMessage",
-      html: `<p>Could not save article. Please try again later!</p>`
+      id: "articleMessage",
+      html: `<span>Could not save article. Please try again later!</span>`
     }));
   }
-});
+}
+$('#saveArticle').on('click', handleSaveArticle);

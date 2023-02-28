@@ -9,12 +9,12 @@ router.post('/', async (req, res) => {
       email: req.body.email,
       password: req.body.password,
     });
-
+    // adds id and username to the session so that they can be displayed
     req.session.save(() => {
       req.session.loggedIn = true;
       req.session.userId  = dbUserData.get({plain:true}).id;
       req.session.username  = dbUserData.get({plain:true}).username;
-      res.status(200).json(dbUserData);
+      res.status(200).json();
     });
   } catch (err) {
     console.log(err);
@@ -46,14 +46,14 @@ router.post('/login', async (req, res) => {
         .json({ message: 'Incorrect email or password. Please try again!' });
       return;
     }
-
+    // adds id and username to the session so that they can be displayed
     req.session.save(() => {
       req.session.loggedIn = true;
       req.session.userId = dbUserData.get({plain:true}).id;
       req.session.username  = dbUserData.get({plain:true}).username;
       res
         .status(200)
-        .json({ user: dbUserData, message: 'You are now logged in!' });
+        .json();
     });
   } catch (err) {
     console.log(err);
@@ -63,13 +63,9 @@ router.post('/login', async (req, res) => {
 
 // Logout
 router.post('/logout', (req, res) => {
-  if (req.session.loggedIn) {
-    req.session.destroy(() => {
+   req.session.destroy(() => {
       res.status(204).end();
-    });
-  } else {
-    res.status(404).end();
-  }
+  })
 });
 
 module.exports = router;

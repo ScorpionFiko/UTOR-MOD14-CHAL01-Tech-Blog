@@ -1,3 +1,4 @@
+// login handler - verifes user credentials and logs in the user
 const loginFormHandler = async (event) => {
   event.preventDefault();
   $('#loginMessage').remove();
@@ -5,7 +6,6 @@ const loginFormHandler = async (event) => {
   const password = $('#loginPassword').val().trim();
 
   if (email && password) {
-    // TODO: Add a comment describing the functionality of this expression
     const response = await fetch('/api/users/login', {
       method: 'POST',
       body: JSON.stringify({ email, password }),
@@ -15,22 +15,21 @@ const loginFormHandler = async (event) => {
     if (response.ok) {
       document.location.replace('/');
     } else {
-      const data = response.json();
+      const data = await response.json();
 
-      $('#loginForm').append($('<div>', {
+      $('#loginForm').prepend($('<div>', {
         class: "alert alert-danger",
         id: "loginMessage",
-        html: "<p>Incorrect email or password. Please try again!</p>"
+        html: `<span>${data.message}</span>`
       }));
 
     }
   }
 };
-
 $('#loginForm').on('submit', loginFormHandler);
 
 
-
+// registration form handler
 const registerFormHandler = async (event) => {
   event.preventDefault();
   $('#registerMessage').remove();
@@ -40,13 +39,23 @@ const registerFormHandler = async (event) => {
   const confirmPassword = $('#registerConfirmPassword').val().trim();
 
   if (password !== confirmPassword) {
-    $('#registerForm').append($('<div>', {
+    $('#registerForm').prepend($('<div>', {
       class: "alert alert-danger",
       id: "registerMessage",
-      html: "<p>The passwords do not match. Please try again!</p>"
+      html: "<span>The passwords do not match. Please try again!</span>"
     }));
     return;
   }
+
+  if (!/.{8,}/.test(password)) {
+    $('#registerForm').prepend($('<div>', {
+      class: "alert alert-danger",
+      id: "registerMessage",
+      html: "<span>The password must be minimum 8 characters long. Please try again!</span>"
+    }));
+    return;
+  }
+
 
   if (username && email && password) {
     const response = await fetch('/api/users/', {
@@ -58,18 +67,17 @@ const registerFormHandler = async (event) => {
     if (response.ok) {
       document.location.replace('/');
     } else {
-      const data = response.json();
+      const data = await response.json();
 
-      $('#registerForm').append($('<div>', {
+      $('#registerForm').prepend($('<div>', {
         class: "alert alert-danger",
         id: "registerMessage",
-        html: "<p>Could not register new user. Please try again!</p>"
+        html: "<span>Could not register new user. Please try again!</span>"
       }));
 
     }
   }
 };
-
 $('#registerForm').on('submit', registerFormHandler);
 
 

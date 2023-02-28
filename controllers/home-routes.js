@@ -3,6 +3,7 @@ const { Article, Comment, User } = require('../models');
 const sequelize = require('../config/connection');
 const withAuth = require('../utils/auth');
 
+// gets all articles for the landing page; if user is logged in returns additional information
 router.get('/', async (req, res) => {
     try {
         let articleData=[];
@@ -18,17 +19,21 @@ router.get('/', async (req, res) => {
                 attributes: ['id','text']
             });
         }
-
         const articles = articleData.map((article) => article.get({ plain: true }));
-        // must change to res.render("view") later on
-        res.render('home/homepage', { layout:'main', articles, loggedIn: req.session.loggedIn, userId: req.session.userId, username: req.session.username });
-        //res.status(200).json(articles);
+        res.render('home/homepage', { 
+            layout:'main', 
+            articles, 
+            loggedIn: req.session.loggedIn, 
+            userId: req.session.userId, 
+            username: req.session.username });
+
     } catch (err) {
         console.log(err);
         res.status(500).json(err);
     }
 });
-// clicking on article from homepage
+
+// gets a single article with comments to display to the user
 router.get('/article/:id', withAuth, async (req, res) => {
     try {
         const articleData = await Article.findByPk(req.params.id,{
@@ -41,21 +46,23 @@ router.get('/article/:id', withAuth, async (req, res) => {
             }]
         });
 
-
         const article = articleData.get({plain: true});
-        // must change to res.render("view") later on
-        res.render('home/article', { layout: "main", article, loggedIn: req.session.loggedIn,userId: req.session.userId, username: req.session.username })
+        res.render('home/article', { 
+            layout: "main", 
+            article, 
+            loggedIn: req.session.loggedIn,userId: 
+            req.session.userId, 
+            username: req.session.username });
     } catch (err) {
         console.log(err);
         res.status(500).json(err);
     }
 });
 
+// renders the login page
 router.get('/login', async (req, res) => {
     try {
-        
         res.render('home/login', { layout: "main" });
-        //res.status(200).json(articles);
     } catch (err) {
         console.log(err);
         res.status(500).json(err);
