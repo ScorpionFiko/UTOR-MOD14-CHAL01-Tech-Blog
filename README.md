@@ -109,6 +109,7 @@ back to [Table of Contents](#table-of-contents)
 ## Future Development
 
 Here are some of the items to be considered for future development.
-1. Find a way to color the user's own comments on articles in a different colour
+1. Colour the user's own comments on articles in a different colour
+2. Position the user's own comments differently from the rest similar to text messaging.
 
 back to [Table of Contents](#table-of-contents)
