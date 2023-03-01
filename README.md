@@ -112,5 +112,6 @@ Here are some of the items to be considered for future development.
 1. Colour the user's own comments on articles in a different colour
 2. Position the user's own comments differently from the rest similar to text messaging.
 3. Make the comments (or articles) as closed accordions elements that the user can click on and expand.
+4. Update the timezone on the database connection to match the heroku server. 
 
 back to [Table of Contents](#table-of-contents)
