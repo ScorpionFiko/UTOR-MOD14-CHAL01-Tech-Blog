@@ -55,7 +55,7 @@
   
   .list-item-title {
     display: inline-block;
-    width: 75%;
+    width: 100%;
   }
   
   .list-container i {
@@ -69,4 +69,18 @@
     padding: 20px;
   
   }
-  
+ .justified{
+  justify-content:space-between;
+ }
+  @media screen and (max-width: 768px) {
+    /* updates the styling of the top header container of the webpage */
+    .article-title {
+      height: 3rem;
+      margin-top: 13px;
+      font-size: 2rem;
+    }
+
+    .justified{
+      justify-content: center;
+     }
+  }

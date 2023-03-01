@@ -16,19 +16,19 @@
 </head>
 
 <body>
-  <nav class="navbar justify-content-between bg-info">
-    <div class="col" >
+  <nav class="navbar justified bg-info">
+    <div class="" >
       <div class="float-left">
-        <a class="navbar-brand text-light p-2" href="/"><h1 class="m-2"><i class="fa fa-microchip"></i>Tech Blog
-        {{#if username}}
-          <span class="fst-italic">Welcome {{username}} </span>
-        {{/if}}
+        <a class="navbar-brand text-light p-3" href="/"><h1 class="m-2"><i class="fa fa-microchip"></i>Tech Blog
         </h1>
         </a>
       </div>
     </div>
-        <div class="col">
-          <div class="float-right">
+        <div class="">
+          <div class="content-center float-right">
+                    {{#if username}}
+          <H3 class="text-light fst-italic text-center">Welcome {{username}} </H3>
+        {{/if}}
           <a id="home" class="navbar-brand text-light p-3 " href="/"><i class="m-1 fas fa-home"></i>Home</a>
           <a id="dashboard" class="navbar-brand text-light p-3 " href="/dashboard"><i class="m-1 fas fa-dashboard"></i>Dashboard</a>
           {{#if loggedIn}}
@@ -40,9 +40,7 @@
         </div>
 
   </nav>
-  <div class="container">
     {{{body}}}
-  </div>
   {{#if loggedIn}}
   <script src="/js/logout.js"></script>
   <script src="/js/comment.js"></script>

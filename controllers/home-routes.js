@@ -39,7 +39,7 @@ router.get('/article/:id', withAuth, async (req, res) => {
         const articleData = await Article.findByPk(req.params.id,{
             include: [{
                 model: Comment,
-                include: [{model: User, attributes: ['id','username']}]     
+                include: [{model: User, attributes: ['id','username']}],     
             },
             { 
                 model: User, attributes: ['id','username']

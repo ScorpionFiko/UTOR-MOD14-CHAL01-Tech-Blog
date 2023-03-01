@@ -7,5 +7,7 @@ module.exports = {
       format_date: (date) => {
         return dayjs(date).format("M/DD/YYYY");
       },
-
+      check_user: (commentUserId, loggedUserId) => {
+        return commentUserId === loggedUserId;
+      },
 }
