@@ -3,16 +3,23 @@ University of Toronto - Module 14 - Challenge 01 - Tech Blog
 
 ## Description
 
-Repository containing the code for the TechBlog . This is a server side project using node.js where the user has several routes available to them to make CRUD (Create Read Update Delete) operations on four aspects of an e-commerce site:
-- Products
-- Categories
-- Tags
-- Product Tags (the link between products and tags. One product can have many tags; and one tag can be given to many products)
+Repository containing the code for the TechBlog application. This is a full stack application that presents the user with ways to communicate with each other regarding technical topics. At the front-end of the application, the user can see a listing or articles once the user lands on the page. Upon loggin in, the user is greeted with "Welcome user" on the banner, and the user can see more information on the the article listing. 
 
-The information is stored in MySQL database, which is seeded with supplied sample data. The route testing is done using Insomnia.
+Upon clicking on the read more, the user is taken to the particular article with all comments that exist on the article. The user can also add a comment of their own using the form provided. To minimize bad data, the add button is displayed only after the user has entered 15 characters into the field.
 
-Below is the image of Insomnia when the user has made a query
-![Insomnia - Products - get all products](./assets/images/EBE-01-insomnia-product-get-all.png)
+The dashboard provides the user a way to keep track and mainting the user's articles. The user can see a listing of their atricles, edit existing articles, or add new ones. Just like the comment section, to minimize bad data, the add button is displayed only after the user has entered 15 characters into the article text field. 
+
+At the back-end, the application stores all information in SQL database and uses custom built API's to access, update, and delete data. The user log in time is limited to 60 minutes after which, the user needs to log back in to make any edits
+
+
+Below is the image of the application when a user arrives at the page.
+![Tech blog - landing](./assets/images/TB-01-landing.png)
+
+Below is the image of an article and its comments after user has logged in.
+![Tech blog - logged in landing](./assets/images/TB-02-article.png)
+
+Below is the image of the application when the user accesses the dashboard
+![Tech blog - logged in dashboard](./assets/images/TB-03-dashboard.png)
 
 
 ## Table of Contents
@@ -28,32 +35,7 @@ Below is the image of Insomnia when the user has made a query
 
 ## Installation
 
-PRE-Requisites: 
-- you must have node.js version 16.* installed on your computer prior to proceeding
-- you must have MySQL/MariaDB installed on your computer prior to proceeding
-
-
-### Databse setup
-This must be executed before launching the application
-1. Log into your MySQL/MariaDB server.
-2. Execute the following command:
-```md
-    mysql> source path_to_schema.sql/schema.sql
-```
-3. Verify the database creation by running the command. The database should be listed in the results
-```md
-    mysql> show databases;
-```
-
-### Application launch:
-1. Download the source code
-2. Navigate to the folder containing the package.json file
-3. Run the following commands
-```md
-    $ npm install
-    $ npm run seed
-    $ npm start
-```
+No installation requirements. Simply visit https://stefans-tech-blog.herokuapp.com/ to view the application
 
 back to [Table of Contents](#table-of-contents)
 
@@ -68,42 +50,31 @@ The following discusses at a high level about some of the features of the websit
 The entire porject is built on Node.js utilizing the following additional libraries:
 - sequalize: this librabry handles all communication between the application and the database. The library makes use of Javascript objects, which subsequently translates to SQL stataments to perform database operations.
 - dotenv: this 'hides' the sensitive information such as database user names and passwords into a hidden file named .env. The file is added to the process variables which are used by sequalize to establish database connection.
+- express-session: this stores the session data including items like the user name and user id when the user logs in.
+- handlebars: this is the template engine that is responsible for rendering all the data on the page. Several templates are used and several partials are used to fill repretitive data.
 
+### Bootstrap, jQuery, and FontAwesome
 
-### Insomnia:
+The project relies on the bootstrap framework to handle all elements and their responsiveness on the various devices. 
 
-This is a tool used to test the operation of various API's. The tool lets us access a route and retrieve any corresponding information the routes provides. The information could be data in JSON format or an error/warning message.
+jQuery is used for all browser related JavaScript code to access and update elements. 
 
+Font awesome handles the additional graphics on the website.
 
 back to [Table of Contents](#table-of-contents)
 
 ## Usage
 
-For accessing the application:<br>
-
-1. After the server has been started (as per the instructions in the installation section) launch Insomnia
-2. Run any of the following types of requests
-```md
-    GET:    http://localhost:3001/api/products/
-    GET:    http://localhost:3001/api/products/product_id
-    POST:   http://localhost:3001/api/products/
-    PUT:    http://localhost:3001/api/products/product_id
-    DELETE: http://localhost:3001/api/products/product_id
-
-    GET:    http://localhost:3001/api/categories/
-    GET:    http://localhost:3001/api/categories/category_id
-    POST:   http://localhost:3001/api/categories/
-    PUT:    http://localhost:3001/api/categories/category_id
-    DELETE: http://localhost:3001/api/categories/category_id
-
-    GET:    http://localhost:3001/api/tags/
-    GET:    http://localhost:3001/api/tags/tags_id
-    POST:   http://localhost:3001/api/tags/
-    PUT:    http://localhost:3001/api/tags/tags_id
-    DELETE: http://localhost:3001/api/tags/tags_id
-
-```
-3. In the case of the POST and PUT, you must supply information in the body of the request. Refer to the walkthrough for more details.
+1. Go to https://stefans-tech-blog.herokuapp.com/
+2. Click on Sign-in icon at the top
+    1. for existing users, enter your email and password
+    2. for new users, click the "register" button and fill the information on the form
+3. To view an article and its comments, click on the Read More link.
+    1. to add a comment to an article, enter your comment and click on the "Add" button
+4. To access your own articles, click on the dashboard link
+    1. to add a new article, fill in the title and the text and click the save button
+    2. to view/update an existing article, click on the pencil icon beside the article title
+    3. to delete an existing artice, click on the garbage can beside the article title
 
 back to [Table of Contents](#table-of-contents)
 
@@ -130,7 +101,7 @@ back to [Table of Contents](#table-of-contents)
 
 ## Walkthrough
 
-- Application walkthrough: https://youtu.be/Bpt7DnwJpdI
+This app is a hands on app where the user can interact with it. No video walkthrough is necessary.
 
 back to [Table of Contents](#table-of-contents)
 
@@ -138,6 +109,6 @@ back to [Table of Contents](#table-of-contents)
 ## Future Development
 
 Here are some of the items to be considered for future development.
-1. Develop a front end
+1. Find a way to color the user's own comments on articles in a different colour
 
 back to [Table of Contents](#table-of-contents)
